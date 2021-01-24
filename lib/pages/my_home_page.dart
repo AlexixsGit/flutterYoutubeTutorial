@@ -7,56 +7,64 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  TextEditingController nameTextController;
-  TextEditingController lastnameController;
+  String nameValue;
+  String lastnameValue;
+
+  final formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Form fields Implementation without form'),
+          title: Text('Form fields Implementation with form'),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              TextField(
-                decoration: InputDecoration(labelText: 'Name'),
-                controller: nameTextController,
+            padding: const EdgeInsets.all(16.0),
+            child: Form(
+              key: formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    onSaved: (value) {
+                      nameValue = value;
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'The name cannot be empty';
+                      }
+                      return null;
+                    },
+                    decoration: InputDecoration(labelText: 'Name'),
+                  ),
+                  TextFormField(
+                    decoration: InputDecoration(labelText: 'Lastname'),
+                    onSaved: (value) {
+                      lastnameValue = value;
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'The lastname cannot be empty';
+                      }
+                      return null;
+                    },
+                  ),
+                  RaisedButton(
+                    onPressed: () {
+                      _showSecondPage(context);
+                    },
+                    child: Text('Show second page'),
+                  )
+                ],
               ),
-              TextField(
-                decoration: InputDecoration(labelText: 'Lastname'),
-                controller: lastnameController,
-              ),
-              RaisedButton(
-                onPressed: () {
-                  _showSecondPage(context);
-                },
-                child: Text('Show second page'),
-              )
-            ],
-          ),
-        ));
+            )));
   }
 
   void _showSecondPage(BuildContext context) {
-    Navigator.pushNamed(context, '/second',
-        arguments: SecondPageArguments(
-            name: this.nameTextController.text,
-            lastname: this.lastnameController.text));
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    this.lastnameController = TextEditingController();
-    this.nameTextController = TextEditingController();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-    this.lastnameController.dispose();
-    this.nameTextController.dispose();
+    if (formKey.currentState.validate()) {
+      formKey.currentState.save();
+      Navigator.pushNamed(context, '/second',
+          arguments: SecondPageArguments(
+              name: this.nameValue, lastname: this.lastnameValue));
+    }
   }
 }
