@@ -48,6 +48,20 @@ class _MyHomePageState extends State<MyHomePage> {
                       return null;
                     },
                   ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(labelText: 'Phone number'),
+                    onSaved: (value) {
+                      print(value);
+                    },
+                  ),
+                  TextFormField(
+                    obscureText: true,
+                    decoration: InputDecoration(labelText: 'Password'),
+                    onSaved: (value) {
+                      print(value);
+                    },
+                  ),
                   RaisedButton(
                     onPressed: () {
                       _showSecondPage(context);
