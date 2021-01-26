@@ -41,11 +41,25 @@ class _FolderState extends State<FolderList> {
     );
   }
 
+  void _showSnackbar(BuildContext context, String label) {
+    SnackBar snackbar = SnackBar(
+      content: Text(label),
+      duration: Duration(seconds: 1),
+      action: SnackBarAction(
+        label: 'Close',
+        onPressed: () => print('closed'),
+      ),
+    );
+    Scaffold.of(context).showSnackBar(snackbar);
+  }
+
   void _changeIcon() {
     if (checkboxValue) {
       this.listIcon = Icons.check;
+      _showSnackbar(context, 'Element checked');
     } else {
       this.listIcon = Icons.folder;
+      _showSnackbar(context, 'Element unchecked');
     }
   }
 }

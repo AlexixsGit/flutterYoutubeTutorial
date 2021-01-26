@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:youtube_tutorial_app/model/second_page_arguments.dart';
+import 'package:youtube_tutorial_app/src/screens/folder-list.dart';
 
 class SecondPage extends StatelessWidget {
   const SecondPage({Key key}) : super(key: key);
@@ -15,11 +16,20 @@ class SecondPage extends StatelessWidget {
             'Welcome ${secondPageArguments.name}  ${secondPageArguments.lastname}'),
       ),
       body: Center(
-        child: RaisedButton(
-          onPressed: () {
-            _returnHomePage(context);
-          },
-          child: Text('Return to home'),
+        child: Container(
+          child: Column(
+            children: [
+              FolderList(1),
+              FolderList(2),
+              FolderList(3),
+              RaisedButton(
+                onPressed: () {
+                  _returnHomePage(context);
+                },
+                child: Text('Return to home'),
+              )
+            ],
+          ),
         ),
       ),
     );
