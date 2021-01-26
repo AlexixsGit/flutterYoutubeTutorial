@@ -71,6 +71,8 @@ class SecondPage extends StatelessWidget {
                   onPressed: () => Navigator.popAndPushNamed(context, '/'),
                   child: Text('Yes'))
             ],
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
           );
         });
   }
