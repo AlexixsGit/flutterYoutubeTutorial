@@ -45,13 +45,31 @@ class SecondPage extends StatelessWidget {
               ListTile(
                 title: Text('Return home'),
                 leading: Icon(Icons.keyboard_return),
-                onTap: () => Navigator.popAndPushNamed(scaffoldContext, '/'),
+                onTap: () => _showAlertDialog(context),
               ),
               ListTile(
                 title: Text('Close'),
                 leading: Icon(Icons.close),
                 onTap: () => Navigator.pop(context),
               )
+            ],
+          );
+        });
+  }
+
+  void _showAlertDialog(BuildContext showDialogContext) {
+    showDialog(
+        context: showDialogContext,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Question'),
+            content: Text('Are you sure?'),
+            actions: [
+              FlatButton(
+                  onPressed: () => Navigator.pop(context), child: Text('No')),
+              FlatButton(
+                  onPressed: () => Navigator.popAndPushNamed(context, '/'),
+                  child: Text('Yes'))
             ],
           );
         });
