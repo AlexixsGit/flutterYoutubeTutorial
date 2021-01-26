@@ -44,6 +44,7 @@ class _FolderState extends State<FolderList> {
   void _showSnackbar(BuildContext context, String label) {
     SnackBar snackbar = SnackBar(
       content: Text(label),
+      backgroundColor: Colors.blue,
       duration: Duration(seconds: 1),
       action: SnackBarAction(
         label: 'Close',

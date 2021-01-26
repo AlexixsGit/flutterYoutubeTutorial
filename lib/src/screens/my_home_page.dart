@@ -7,8 +7,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  String nameValue;
-  String lastnameValue;
+  TextEditingController nameController;
+  TextEditingController lastnameController;
 
   FocusNode nameFocus;
   FocusNode lastnameFocus;
@@ -33,9 +33,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   Column(
                     children: [
                       TextFormField(
-                        onSaved: (value) {
-                          nameValue = value;
-                        },
+                        controller: nameController,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'The name cannot be empty';
@@ -50,9 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       TextFormField(
                         decoration: InputDecoration(labelText: 'Lastname'),
-                        onSaved: (value) {
-                          lastnameValue = value;
-                        },
+                        controller: lastnameController,
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'The lastname cannot be empty';
@@ -123,7 +119,8 @@ class _MyHomePageState extends State<MyHomePage> {
       formKey.currentState.save();
       Navigator.pushNamed(context, '/second',
           arguments: SecondPageArguments(
-              name: this.nameValue, lastname: this.lastnameValue));
+              name: this.nameController.text,
+              lastname: this.lastnameController.text));
     }
   }
 
@@ -139,6 +136,8 @@ class _MyHomePageState extends State<MyHomePage> {
     this.phoneNumberFocus = FocusNode();
     this.passwordFocus = FocusNode();
     this.btnShowSecondPageFocus = FocusNode();
+    this.nameController = TextEditingController();
+    this.lastnameController = TextEditingController();
   }
 
   @override
@@ -149,6 +148,8 @@ class _MyHomePageState extends State<MyHomePage> {
     this.phoneNumberFocus.dispose();
     this.passwordFocus.dispose();
     this.btnShowSecondPageFocus.dispose();
+    this.nameController.dispose();
+    this.lastnameController.dispose();
   }
 
   void showHome(BuildContext context) {

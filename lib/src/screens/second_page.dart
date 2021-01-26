@@ -24,9 +24,9 @@ class SecondPage extends StatelessWidget {
               FolderList(3),
               RaisedButton(
                 onPressed: () {
-                  _returnHomePage(context);
+                  _showDialog(context);
                 },
-                child: Text('Return to home'),
+                child: Text('Show Options'),
               )
             ],
           ),
@@ -35,7 +35,25 @@ class SecondPage extends StatelessWidget {
     );
   }
 
-  void _returnHomePage(BuildContext context) {
-    Navigator.pop(context);
+  void _showDialog(BuildContext scaffoldContext) {
+    showDialog(
+        context: scaffoldContext,
+        builder: (BuildContext context) {
+          return SimpleDialog(
+            title: Text('Select an option'),
+            children: [
+              ListTile(
+                title: Text('Return home'),
+                leading: Icon(Icons.keyboard_return),
+                onTap: () => Navigator.popAndPushNamed(scaffoldContext, '/'),
+              ),
+              ListTile(
+                title: Text('Close'),
+                leading: Icon(Icons.close),
+                onTap: () => Navigator.pop(context),
+              )
+            ],
+          );
+        });
   }
 }
