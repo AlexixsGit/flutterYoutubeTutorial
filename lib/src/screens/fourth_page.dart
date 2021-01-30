@@ -10,7 +10,12 @@ class FourthPage extends StatelessWidget {
         title: Text('Image view'),
       ),
       body: Center(
-        child: Image.network(url),
+        child: Hero(
+          tag: url,
+          child: FadeInImage(
+              image: NetworkImage(url),
+              placeholder: AssetImage('assets/giphy.gif')),
+        ),
       ),
     );
   }

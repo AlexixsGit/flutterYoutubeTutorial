@@ -9,17 +9,21 @@ class ThirdPage extends StatelessWidget {
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          final url = 'https://picsum.photos/id/$index/400/300';
+          final url = 'https://picsum.photos/id/$index/400/600';
           return InkWell(
               onTap: () {
                 Navigator.pushNamed(context, '/fourthPage', arguments: url);
               },
-              child: Card(
-                  child: FadeInImage(
-                image: NetworkImage(url),
-                placeholder: AssetImage('assets/giphy.gif'),
-                height: 300,
-              )));
+              child: Hero(
+                tag: url,
+                child: Card(
+                    child: FadeInImage(
+                  image:
+                      NetworkImage('https://picsum.photos/id/$index/400/300'),
+                  placeholder: AssetImage('assets/giphy.gif'),
+                  height: 300,
+                )),
+              ));
         },
         itemCount: 50,
       ),
