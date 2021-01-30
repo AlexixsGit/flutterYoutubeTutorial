@@ -5,16 +5,21 @@ class ThirdPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Hero'),
+        title: Text('Image list'),
       ),
       body: ListView.builder(
         itemBuilder: (context, index) {
-          return Card(
-              child: FadeInImage(
-            image: NetworkImage('https://picsum.photos/id/$index/400/300'),
-            placeholder: AssetImage('assets/giphy.gif'),
-            height: 300,
-          ));
+          final url = 'https://picsum.photos/id/$index/400/300';
+          return InkWell(
+              onTap: () {
+                Navigator.pushNamed(context, '/fourthPage', arguments: url);
+              },
+              child: Card(
+                  child: FadeInImage(
+                image: NetworkImage(url),
+                placeholder: AssetImage('assets/giphy.gif'),
+                height: 300,
+              )));
         },
         itemCount: 50,
       ),
