@@ -48,6 +48,11 @@ class SecondPage extends StatelessWidget {
                 onTap: () => _showAlertDialog(context),
               ),
               ListTile(
+                title: Text('Go to next page'),
+                leading: Icon(Icons.navigate_next),
+                onTap: () => Navigator.pushNamed(context, '/thirdPage'),
+              ),
+              ListTile(
                 title: Text('Close'),
                 leading: Icon(Icons.close),
                 onTap: () => Navigator.pop(context),
