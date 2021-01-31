@@ -53,6 +53,11 @@ class SecondPage extends StatelessWidget {
                 onTap: () => Navigator.pushNamed(context, '/thirdPage'),
               ),
               ListTile(
+                title: Text('Select an image'),
+                leading: Icon(Icons.navigate_next),
+                onTap: () => Navigator.pushNamed(context, '/fifthPage'),
+              ),
+              ListTile(
                 title: Text('Close'),
                 leading: Icon(Icons.close),
                 onTap: () => Navigator.pop(context),
